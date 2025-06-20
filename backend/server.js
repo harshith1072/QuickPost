@@ -19,12 +19,15 @@ connectDB();
 const app = express();
 
 // Middleware for Cross-Origin requests from your React app
-app.use(
-  cors({
-    origin: "http://localhost:3000", // Your frontend origin
-    credentials: true, // Allow cookies to be sent
-  })
-);
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://quickpost-tkun.onrender.com"
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true,
+}));
 
 // Middleware to parse JSON bodies
 app.use(express.json());
