@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import BlogCard from "../components/BlogCard";
 import { Box, Typography } from "@mui/material";
-
+ import server from "./environment";
 const Blogs = () => {
   const [blogs, setBlogs] = useState([]);
 
   // Fetch all blogs
   const getAllBlogs = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8080/api/v1/blog/all-blog");
+     const { data } = await axios.get(`${server}/api/v1/blog/all-blog`);
       if (data?.success) {
         setBlogs(data.blogs);
       }

@@ -3,7 +3,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { Box, Button, InputLabel, TextField, Typography } from "@mui/material";
-
+ import server from "./environment";
 const BlogDetails = () => {
   const [blog, setBlog] = useState({});
   const id = useParams().id;
@@ -12,7 +12,7 @@ const BlogDetails = () => {
 
   const getBlogDetail = useCallback(async () => {
     try {
-      const { data } = await axios.get(`http://localhost:8080/api/v1/blog/get-blog/${id}`);
+     const { data } = await axios.get(`${server}/api/v1/blog/get-blog/${id}`);
       if (data?.success) {
         setBlog(data.blog);
         setInputs({
@@ -40,12 +40,12 @@ const BlogDetails = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.put(`http://localhost:8080/api/v1/blog/update-blog/${id}`, {
-        title: inputs.title,
-        description: inputs.description,
-        image: inputs.image,
-        user: id,
-      });
+     const { data } = await axios.put(`${server}/api/v1/blog/update-blog/${id}`, {
+  title: inputs.title,
+  description: inputs.description,
+  image: inputs.image,
+  user: id,
+});
       if (data?.success) {
         toast.success("Blog Updated");
         navigate("/my-blogs");
